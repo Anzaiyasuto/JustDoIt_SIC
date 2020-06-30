@@ -71,11 +71,13 @@ class ScheduleEditActivity : AppCompatActivity() {
             }
         }
         delete.setOnClickListener {view: View ->
-            AlertDialog.Builder(this) // FragmentではActivityを取得して生成
+
+            //ダイアログを表示
+            AlertDialog.Builder(this)
                 .setTitle("確認")
                 .setMessage("タスクを削除しますか？")
                 .setPositiveButton("はい", { dialog, which ->
-                    //TODO:はいが押された時の挙動
+                    //ダイアログで「はい」が押された時はタスクを削除する
                         realm.executeTransaction { db: Realm ->
                             db.where<Schedule>().equalTo("id", scheduleId)
                                 ?.findFirst()
@@ -87,7 +89,7 @@ class ScheduleEditActivity : AppCompatActivity() {
                             .show()
                 })
                 .setNegativeButton("いいえ", { dialog, which ->
-                    // TODO:いいえが押された時の挙動
+                    //ダイアログで「いいえ」が押された時は何もしない
                 })
                 .show()
         }
