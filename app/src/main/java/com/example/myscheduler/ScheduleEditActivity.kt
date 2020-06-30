@@ -72,10 +72,10 @@ class ScheduleEditActivity : AppCompatActivity() {
         }
         delete.setOnClickListener {view: View ->
             AlertDialog.Builder(this) // FragmentではActivityを取得して生成
-                .setTitle("タイトル")
-                .setMessage("メッセージ")
-                .setPositiveButton("OK", { dialog, which ->
-                    //TODO:Yesが押された時の挙動
+                .setTitle("確認")
+                .setMessage("タスクを削除しますか？")
+                .setPositiveButton("はい", { dialog, which ->
+                    //TODO:はいが押された時の挙動
                         realm.executeTransaction { db: Realm ->
                             db.where<Schedule>().equalTo("id", scheduleId)
                                 ?.findFirst()
@@ -86,8 +86,8 @@ class ScheduleEditActivity : AppCompatActivity() {
                             .setActionTextColor(Color.YELLOW)
                             .show()
                 })
-                .setNegativeButton("No", { dialog, which ->
-                    // TODO:Noが押された時の挙動
+                .setNegativeButton("いいえ", { dialog, which ->
+                    // TODO:いいえが押された時の挙動
                 })
                 .show()
         }
