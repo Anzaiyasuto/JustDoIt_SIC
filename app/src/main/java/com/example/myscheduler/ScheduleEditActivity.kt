@@ -37,11 +37,18 @@ class ScheduleEditActivity : AppCompatActivity() {
         save.setOnClickListener { view: View ->
             when (scheduleId) {
                 -1L -> {
+
                     realm.executeTransaction { db: Realm ->
                         val maxId = db.where<Schedule>().max("id")
                         val nextId = (maxId?.toLong() ?: 0L) + 1
                         val schedule = db.createObject<Schedule>(nextId)
-                        val date = dateEdit.text.toString().toDate("yyyy/MM/dd")
+
+
+                        override fun onSelected(year: Int, month: Int, date: Int) {
+                            val c = Calendar.getInstance()
+                            c.set(year, month, date)
+                            dateText.text = DateFormat.format("yyyy/MM/dd", c)
+
                         if (date != null) schedule.date = date
                         schedule.title = titleEdit.text.toString()
                         schedule.detail = detailEdit.text.toString()
