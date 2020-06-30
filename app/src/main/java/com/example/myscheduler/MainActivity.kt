@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
                 .putExtra("schedule_id", id)
             startActivity(intent)
         }
+
     }
 
     override fun onDestroy() {

@@ -26,7 +26,7 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
         val title: TextView = cell.findViewById(android.R.id.text2)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val infrater = LayoutInflater.from(parent.context)
         val view = infrater.inflate(
             android.R.layout.simple_list_item_2,
@@ -35,7 +35,7 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ScheduleAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val schedule: Schedule? = getItem(position)
         holder.date.text = DateFormat.format("yyyy/MM/dd", schedule?.date)
         holder.title.text = schedule?.title
