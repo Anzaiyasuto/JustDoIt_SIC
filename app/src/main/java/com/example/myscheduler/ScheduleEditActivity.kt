@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.kotlin.createObject
@@ -69,15 +70,25 @@ class ScheduleEditActivity : AppCompatActivity() {
                 }
             }
         }
-        delete.setOnClickListener { view: View ->
-            realm.executeTransaction { db: Realm ->
-                db.where<Schedule>().equalTo("id", scheduleId)
-                    ?.findFirst()
-                    ?.deleteFromRealm()
-            }
-            Snackbar.make(view, "削除しました", Snackbar.LENGTH_SHORT)
-                .setAction("戻る") { finish() }
-                .setActionTextColor(Color.YELLOW)
+        delete.setOnClickListener {view: View ->
+            AlertDialog.Builder(this) // FragmentではActivityを取得して生成
+                .setTitle("タイトル")
+                .setMessage("メッセージ")
+                .setPositiveButton("OK", { dialog, which ->
+                    //TODO:Yesが押された時の挙動
+                        realm.executeTransaction { db: Realm ->
+                            db.where<Schedule>().equalTo("id", scheduleId)
+                                ?.findFirst()
+                                ?.deleteFromRealm()
+                        }
+                        Snackbar.make(view, "削除しました", Snackbar.LENGTH_SHORT)
+                            .setAction("戻る") { finish() }
+                            .setActionTextColor(Color.YELLOW)
+                            .show()
+                })
+                .setNegativeButton("No", { dialog, which ->
+                    // TODO:Noが押された時の挙動
+                })
                 .show()
         }
     }
