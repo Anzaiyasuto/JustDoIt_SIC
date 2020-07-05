@@ -37,7 +37,8 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val schedule: Schedule? = getItem(position)
-        holder.date.text = DateFormat.format("yyyy/MM/dd", schedule?.date)
+        holder.date.text = DateFormat.format("yyyy/MM/dd", schedule?.day)
+        holder.date.text = DateFormat.format("HH:mm", schedule?.time)
         holder.title.text = schedule?.title
         holder.itemView.setOnClickListener {
             listener?.invoke(schedule?.id)
