@@ -11,21 +11,18 @@ import io.realm.RealmRecyclerViewAdapter
 
 class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
     RealmRecyclerViewAdapter<Schedule, ScheduleAdapter.ViewHolder>(data, true) {
-
     private var listener: ((Long?) -> Unit)? = null
     fun setOnItemClickListener(listener: (Long?) -> Unit) {
         this.listener = listener
     }
-
     init {
         setHasStableIds(true)
     }
-
     class ViewHolder(cell: View) : RecyclerView.ViewHolder(cell) {
-        val date: TextView = cell.findViewById(android.R.id.text1)
+        val day: TextView = cell.findViewById(android.R.id.text1)
+        //val time: TextView = cell.findViewById(android.R.id.text2)
         val title: TextView = cell.findViewById(android.R.id.text2)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val infrater = LayoutInflater.from(parent.context)
         val view = infrater.inflate(
@@ -34,17 +31,15 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
         )
         return ViewHolder(view)
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val schedule: Schedule? = getItem(position)
-        holder.date.text = DateFormat.format("yyyy/MM/dd", schedule?.day)
-        holder.date.text = DateFormat.format("HH:mm", schedule?.time)
+        holder.day.text = DateFormat.format("yyyy/MM/dd ", schedule?.day)
+        //holder.time.text = DateFormat.format("HH:mm ", schedule?.time)
         holder.title.text = schedule?.title
         holder.itemView.setOnClickListener {
             listener?.invoke(schedule?.id)
         }
     }
-
     override fun getItemId(position: Int): Long {
         return getItem(position)?.id ?: 0
     }

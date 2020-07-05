@@ -29,12 +29,9 @@ class ScheduleEditActivity : AppCompatActivity(),
         c.set(year, month, date)
         dateEdit.text = DateFormat.format("yyyy/MM/dd", c)
     }
-
     override fun onSelected(hourOfDay: Int, minute: Int) {
         dateEdit2.text = "%1$02d:%2$02d".format(hourOfDay, minute)
     }
-
-
     private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,11 +50,13 @@ class ScheduleEditActivity : AppCompatActivity(),
             dateEdit2.setText(DateFormat.format("HH:mm", schedule?.time))
             titleEdit.setText(schedule?.title)
             if (schedule != null) {
-                progress_seekbar.progress = schedule.progress_data
-                val str = String.format(Locale.US, "%d %%", schedule.progress_data)
+                progress_seekbar.progress = schedule.progressDate
+                val str = String.format(Locale.US, "%d %%", schedule.progressDate)
                 progress_text.text = str
             }
+            limit_text.visibility = View.VISIBLE
             delete.visibility = View.VISIBLE
+            textView3.visibility = View.VISIBLE
         } else {
             //新規タスクを見るとき
             realm.executeTransaction{ db: Realm ->
@@ -65,8 +64,9 @@ class ScheduleEditActivity : AppCompatActivity(),
                     .equalTo("id", scheduleId).findFirst()
 
             }
-
+            limit_text.visibility = View.INVISIBLE
             delete.visibility = View.INVISIBLE
+            textView3.visibility = View.INVISIBLE
         }
 
         dateEdit.setOnClickListener {
@@ -90,13 +90,16 @@ class ScheduleEditActivity : AppCompatActivity(),
                         if (dateDayNew != null) schedule.day = dateDayNew
                         if (dateTimeNew != null) schedule.time = dateTimeNew
                         schedule.title = titleEdit.text.toString()
-                        schedule.progress_data = progress_seekbar.progress
+                        schedule.progressDate = progress_seekbar.progress
                         schedule.completeFlag = 0
                     }
+                    //初回の保存に関してはダイアログ表示を行わないー＞というよりも行えない（技術力不足）
+                    /*
                     Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
-                        .setAction("戻る") { finish() }
                         .setActionTextColor(Color.YELLOW)
                         .show()
+                    */
+                    finish()
                 }
                 else -> {
                     realm.executeTransaction { db: Realm ->
@@ -109,7 +112,7 @@ class ScheduleEditActivity : AppCompatActivity(),
                         val dateTimeRenew = dateEdit2.text.toString().toDate("HH:mm")
                         if (dateDayRenew != null) schedule?.day = dateDayRenew
                         if (dateTimeRenew != null) schedule?.time = dateTimeRenew
-                        if (schedule != null) schedule.progress_data = progress_seekbar.progress
+                        if (schedule != null) schedule.progressDate = progress_seekbar.progress
                     }
                     Snackbar.make(view, "修正しました", Snackbar.LENGTH_SHORT)
                         .setAction("戻る") { finish() }
@@ -163,7 +166,6 @@ class ScheduleEditActivity : AppCompatActivity(),
         super.onDestroy()
         realm.close()
     }
-
     private fun String.toDate(pattern: String = "yyyy/MM/dd HH:mm"): Date? {
         return try {
             SimpleDateFormat(pattern).parse(this)
@@ -173,6 +175,4 @@ class ScheduleEditActivity : AppCompatActivity(),
             return null
         }
     }
-
-
 }

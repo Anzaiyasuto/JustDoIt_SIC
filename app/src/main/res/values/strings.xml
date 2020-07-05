@@ -9,4 +9,5 @@
     <string name="progress_text">進捗：</string>
     <string name="save_text">保存</string>
     <string name="delete_title">削除</string>
+    <string name="limit">残り時間:</string>
 </resources>

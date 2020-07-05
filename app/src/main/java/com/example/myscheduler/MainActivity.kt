@@ -2,6 +2,7 @@ package com.example.myscheduler
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.annotation.IntDef
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testnotificationmanagerrepeat.R
@@ -16,13 +17,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setSupportActionBar(toolbar)
 
         realm = Realm.getDefaultInstance()
         list.layoutManager = LinearLayoutManager(this)
+
+
         val schedules = realm.where<Schedule>().findAll()
-        val adapter = ScheduleAdapter(schedules)
+        val alpha : Int = 0
+        val schedulesTemp = schedules.where().equalTo("completeFlag", alpha).findAll()
+        val adapter = ScheduleAdapter(schedulesTemp)
         list.adapter = adapter
 
         fab.setOnClickListener {
