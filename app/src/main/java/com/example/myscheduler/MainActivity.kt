@@ -22,10 +22,11 @@ class MainActivity : AppCompatActivity() {
         list.layoutManager = LinearLayoutManager(this)
 
 
-        val schedules = realm.where<Schedule>().findAll()
-        val alpha = 0
-        val schedulesTemp = schedules.where().equalTo("completeFlag", alpha)
-        val adapter = ScheduleAdapter(schedulesTemp)
+        val query = realm.where<Schedule>()
+        query.equalTo("completeFlag", 0.toInt())
+        val schedules = query.findAll()
+
+        val adapter = ScheduleAdapter(schedules)
         list.adapter = adapter
 
         fab.setOnClickListener {

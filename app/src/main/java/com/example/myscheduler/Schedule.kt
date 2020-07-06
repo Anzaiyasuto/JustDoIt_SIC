@@ -13,5 +13,5 @@ open class Schedule : RealmObject() {
     var time: Date = Date() //時間(HHmm)
     var progressDate: Int = 0 //進捗度
     var title: String = ""  //タスク名
-    var completeFlag: Int = 1  //完了タスク＝１、未完了＝０
+    var completeFlag: Int = 0  //完了タスク＝１、未完了＝０
 }
