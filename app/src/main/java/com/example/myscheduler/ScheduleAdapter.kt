@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
+import io.realm.RealmQuery
 import io.realm.RealmRecyclerViewAdapter
 
 class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :

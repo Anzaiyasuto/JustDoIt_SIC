@@ -1,13 +1,10 @@
 package com.example.myscheduler
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testnotificationmanagerrepeat.R
-import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,8 +23,8 @@ class MainActivity : AppCompatActivity() {
 
 
         val schedules = realm.where<Schedule>().findAll()
-        val alpha : Int = 0
-        val schedulesTemp = schedules.where().equalTo("completeFlag", alpha).findAll()
+        val alpha = 0
+        val schedulesTemp = schedules.where().equalTo("completeFlag", alpha)
         val adapter = ScheduleAdapter(schedulesTemp)
         list.adapter = adapter
 
