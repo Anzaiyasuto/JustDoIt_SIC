@@ -1,10 +1,16 @@
 package com.example.myscheduler
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.View
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.testnotificationmanagerrepeat.R
@@ -34,6 +40,9 @@ class ScheduleEditActivity : AppCompatActivity(),
     }
     private lateinit var realm: Realm
 
+    private var am: AlarmManager? = null
+    private var pending: PendingIntent? = null
+    private val requestCode = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedule_edit)
@@ -77,6 +86,10 @@ class ScheduleEditActivity : AppCompatActivity(),
             val dialog = TimePickerFragment()
             dialog.show(supportFragmentManager, "time_dialog")
         }
+
+        /**
+         * 処理対象
+         */
         save.setOnClickListener { view: View ->
             when (scheduleId) {
                 -1L -> {
@@ -92,6 +105,29 @@ class ScheduleEditActivity : AppCompatActivity(),
                         schedule.title = titleEdit.text.toString()
                         schedule.progressDate = progress_seekbar.progress
                         schedule.completeFlag = 0
+
+                        //通知処理
+                        val setcalendar = Calendar.getInstance()
+
+                        setcalendar.timeInMillis = System.currentTimeMillis()
+                        setcalendar.add(Calendar.SECOND, 10)
+                        val intent = Intent(applicationContext, AlarmNotification::class.java)
+                        intent.putExtra("RequestCode", requestCode)
+                        pending = PendingIntent.getBroadcast(
+                            applicationContext, requestCode, intent, 0)
+
+                        // アラームをセットする
+                        am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                        if (am != null) {
+                            am!!.setExact(
+                                AlarmManager.RTC_WAKEUP,
+                                setcalendar.timeInMillis, pending)
+
+                            // トーストで設定されたことをを表示
+                            Toast.makeText(applicationContext,
+                                "alarm start", Toast.LENGTH_SHORT).show()
+                            //Log.d("debug", "start")
+                        }
                     }
                     //初回の保存に関してはダイアログ表示を行わないー＞というよりも行えない（技術力不足）
                     /*
@@ -99,7 +135,7 @@ class ScheduleEditActivity : AppCompatActivity(),
                         .setActionTextColor(Color.YELLOW)
                         .show()
                     */
-                    finish()
+
                 }
                 else -> {
                     realm.executeTransaction { db: Realm ->
@@ -120,6 +156,7 @@ class ScheduleEditActivity : AppCompatActivity(),
                         .show()
                 }
             }
+
         }
         delete.setOnClickListener {view: View ->
 
