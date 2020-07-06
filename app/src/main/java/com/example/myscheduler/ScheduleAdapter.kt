@@ -11,10 +11,16 @@ import io.realm.RealmRecyclerViewAdapter
 
 class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
     RealmRecyclerViewAdapter<Schedule, ScheduleAdapter.ViewHolder>(data, true) {
-    private var listener: ((Long?) -> Unit)? = null
+    private var listener1: ((Long?) -> Unit)? = null
+    private var listener2: ((Long?) -> Unit)? = null
     fun setOnItemClickListener(listener: (Long?) -> Unit) {
-        this.listener = listener
+        this.listener1 = listener
     }
+    /*
+    fun setOnItemLongClickListener(listener: (Long?) -> Unit){
+        this.listener2 = listener
+    }
+    */
     init {
         setHasStableIds(true)
     }
@@ -37,7 +43,7 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
         //holder.time.text = DateFormat.format("HH:mm ", schedule?.time)
         holder.title.text = schedule?.title
         holder.itemView.setOnClickListener {
-            listener?.invoke(schedule?.id)
+            listener1?.invoke(schedule?.id)
         }
     }
     override fun getItemId(position: Int): Long {

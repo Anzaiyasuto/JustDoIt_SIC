@@ -1,11 +1,13 @@
 package com.example.myscheduler
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import androidx.annotation.IntDef
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testnotificationmanagerrepeat.R
+import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,7 +40,15 @@ class MainActivity : AppCompatActivity() {
                 .putExtra("schedule_id", id)
             startActivity(intent)
         }
-
+/*
+        adapter.setOnItemLongClickListener{ id ->
+            val schedule = realm.where<Schedule>()
+                .equalTo("id", id).findFirst()
+            if (schedule != null) {
+                schedule.completeFlag = 1
+            }
+        }
+  */
     }
 
     override fun onDestroy() {

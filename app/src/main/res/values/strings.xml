@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyScheduler</string>
+    <string name="app_name">JustDoIt</string>
     <string name="action_settings">Settings</string>
     <string name="dateDay_text">期日：</string>
     <string name="dateTime_text">時間:</string>
