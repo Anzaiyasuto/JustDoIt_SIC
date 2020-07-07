@@ -165,26 +165,39 @@ class ScheduleEditActivity : AppCompatActivity(),
                         am.cancel(pending)
 
                         val date = "${dateEdit.text} ${dateEdit2.text}".toDate()
-                        when{
+                        when {
                             date != null -> {
                                 val calendar = Calendar.getInstance()
                                 calendar.time = date
-                                val intent = Intent(applicationContext, AlarmNotification::class.java)
+                                val intent =
+                                    Intent(applicationContext, AlarmNotification::class.java)
                                 intent.putExtra("RequestCode", requestCode)
                                 // アラームをセットする
-                                am!!.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pending)
+                                am!!.setExact(
+                                    AlarmManager.RTC_WAKEUP,
+                                    calendar.timeInMillis,
+                                    pending
+                                )
                                 // トーストで設定されたことをを表示
-                                Toast.makeText(applicationContext, "alarm restart", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "alarm restart",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 //Log.d("debug", "start")
                             }
                             else -> Toast.makeText(this, "404 Not Found", Toast.LENGTH_LONG).show()
                         }
-                        //alph
+                        //alpha
+                        /*
                         Snackbar.make(view, "修正しました", Snackbar.LENGTH_SHORT)
                             .setAction("戻る") { finish() }
                             .setActionTextColor(Color.YELLOW)
                             .show()
+                    */
+                        finish()
                     }
+
                 }
             }
         }
