@@ -228,10 +228,11 @@ class ScheduleEditActivity : AppCompatActivity(),
 
                     }
 
-                    Snackbar.make(view, "削除しました", Snackbar.LENGTH_SHORT)
-                        .setAction("戻る") { finish() }
-                        .setActionTextColor(Color.YELLOW)
-                        .show()
+                    //Snackbar.make(view, "削除しました", Snackbar.LENGTH_SHORT)
+                    //    .setAction("戻る") { finish() }
+                     //   .setActionTextColor(Color.YELLOW)
+                       // .show()
+                    finish();
                 }
                 .setNegativeButton("いいえ") { _, _ ->
                     //ダイアログで「いいえ」が押された時は何もしない
