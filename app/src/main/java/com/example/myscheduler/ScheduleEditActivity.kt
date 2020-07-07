@@ -90,6 +90,7 @@ class ScheduleEditActivity : AppCompatActivity(),
          * 処理対象
          */
         save.setOnClickListener { view: View ->
+            
             when (scheduleId) {
                 -1L -> {
                     realm.executeTransaction { db: Realm ->
@@ -101,6 +102,7 @@ class ScheduleEditActivity : AppCompatActivity(),
                         val dateTimeNew = dateEdit2.text.toString().toDate("HH:mm")
                         if (dateDayNew != null) newSchedule.day = dateDayNew
                         if (dateTimeNew != null) newSchedule.time = dateTimeNew
+
                         newSchedule.title = titleEdit.text.toString()
                         newSchedule.progressDate = progress_seekbar.progress
                         newSchedule.completeFlag = 0
@@ -146,7 +148,11 @@ class ScheduleEditActivity : AppCompatActivity(),
                         val dateTimeRenew = dateEdit2.text.toString().toDate("HH:mm")
                         if (dateDayRenew != null) reNewSchedule?.day = dateDayRenew
                         if (dateTimeRenew != null) reNewSchedule?.time = dateTimeRenew
+
                         if (reNewSchedule != null) reNewSchedule.progressDate = progress_seekbar.progress
+                        if (reNewSchedule != null) {
+                            if (reNewSchedule.progressDate == 100) reNewSchedule.completeFlag = 1
+                        }
                         if (reNewSchedule != null) requestCode = reNewSchedule.id.toInt()
 
                         //通知処理
