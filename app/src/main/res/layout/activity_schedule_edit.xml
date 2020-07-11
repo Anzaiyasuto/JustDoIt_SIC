@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C3CABC"
+    android:background="#FFFFFF"
+    android:outlineSpotShadowColor="#00FFFFFF"
     tools:context="com.example.myscheduler.ScheduleEditActivity">
 
     <TextView
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/textBackground"
+        android:background="#1A222222"
         android:ems="10"
         android:gravity="center_horizontal"
         android:inputType="date"
@@ -28,6 +29,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/dateDay_text"
+        android:textColor="#232323"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:background="@color/textBackground"
+        android:background="#1A222222"
         android:ems="10"
         android:gravity="center_horizontal"
         android:inputType="date"
@@ -52,6 +55,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:text="@string/title_text"
+        android:textColor="#232323"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateEdit" />
 
@@ -62,7 +67,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/textBackground"
+        android:background="#1A222222"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="24sp"
@@ -76,7 +81,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="#232323"
         android:text="@string/save_text"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -86,7 +93,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="#232323"
         android:text="@string/delete_title"
+        android:textColor="#FF3030"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -97,6 +106,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/progress_text"
+        android:textColor="#232323"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleEdit" />
 
@@ -107,7 +118,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:background="#ccc"
+        android:background="#0B4E3C"
+        android:thumbTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,9 +131,11 @@
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="#CF9292"
+        android:background="#0B4E3C"
         android:gravity="center_horizontal"
+        android:shadowColor="#000000"
         android:text="0%"
+        android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,6 +147,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/dateTime_text"
+        android:textColor="#232323"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/dateEdit2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -143,6 +159,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/limit"
+        android:textColor="#232323"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progress_text" />
 
@@ -152,7 +170,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/textBackground"
+        android:background="#1A222222"
         android:ems="10"
         android:gravity="center_horizontal"
         android:inputType="textPersonName"
