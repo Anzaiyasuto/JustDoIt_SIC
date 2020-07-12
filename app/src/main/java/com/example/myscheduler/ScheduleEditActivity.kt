@@ -4,7 +4,6 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.View
@@ -13,7 +12,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.testnotificationmanagerrepeat.R
-import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
@@ -89,8 +87,8 @@ class ScheduleEditActivity : AppCompatActivity(),
         /**
          * 処理対象
          */
-        save.setOnClickListener { view: View ->
-            
+        save.setOnClickListener {
+
             when (scheduleId) {
                 -1L -> {
                     realm.executeTransaction { db: Realm ->
@@ -179,7 +177,7 @@ class ScheduleEditActivity : AppCompatActivity(),
                                     Intent(applicationContext, AlarmNotification::class.java)
                                 intent.putExtra("RequestCode", requestCode)
                                 // アラームをセットする
-                                am!!.setExact(
+                                am.setExact(
                                     AlarmManager.RTC_WAKEUP,
                                     calendar.timeInMillis,
                                     pending
@@ -207,7 +205,7 @@ class ScheduleEditActivity : AppCompatActivity(),
                 }
             }
         }
-        delete.setOnClickListener {view: View ->
+        delete.setOnClickListener {
 
             //ダイアログを表示
             AlertDialog.Builder(this)
@@ -238,7 +236,7 @@ class ScheduleEditActivity : AppCompatActivity(),
                     //    .setAction("戻る") { finish() }
                      //   .setActionTextColor(Color.YELLOW)
                        // .show()
-                    finish();
+                    finish()
                 }
                 .setNegativeButton("いいえ") { _, _ ->
                     //ダイアログで「いいえ」が押された時は何もしない
