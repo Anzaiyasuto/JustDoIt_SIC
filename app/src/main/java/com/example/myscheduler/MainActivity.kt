@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         realm = Realm.getDefaultInstance()
-        list.layoutManager = LinearLayoutManager(this)
+        recycleView.layoutManager = LinearLayoutManager(this)
 
 
         val query = realm.where<Schedule>()
@@ -27,26 +27,21 @@ class MainActivity : AppCompatActivity() {
         val schedules = query.findAll()
 
         val adapter = ScheduleAdapter(schedules)
-        list.adapter = adapter
-
+        recycleView.adapter = adapter
         fab.setOnClickListener {
             val intent = Intent(this, ScheduleEditActivity::class.java)
             startActivity(intent)
         }
         adapter.setOnItemClickListener { id ->
-            val intent = Intent(this, ScheduleEditActivity::class.java)
+            val intent1 = Intent(this, ScheduleEditActivity::class.java)
                 .putExtra("schedule_id", id)
-            startActivity(intent)
+            startActivity(intent1)
         }
-/*
         adapter.setOnItemLongClickListener{ id ->
-            val schedule = realm.where<Schedule>()
-                .equalTo("id", id).findFirst()
-            if (schedule != null) {
-                schedule.completeFlag = 1
-            }
+            val intent2 = Intent(this, CompleteTaskActivity::class.java)
+            .putExtra("schedule_id", id)
+            startActivity(intent2)
         }
-  */
     }
 
     override fun onDestroy() {
