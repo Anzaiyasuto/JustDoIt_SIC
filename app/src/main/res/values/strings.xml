@@ -10,4 +10,7 @@
     <string name="save_text">保存</string>
     <string name="delete_title">削除</string>
     <string name="limit">残り時間:</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="complete">完了しますか？</string>
 </resources>

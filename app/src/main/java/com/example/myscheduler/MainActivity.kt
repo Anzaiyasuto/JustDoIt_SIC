@@ -22,11 +22,11 @@ class MainActivity : AppCompatActivity() {
         recycleView.layoutManager = LinearLayoutManager(this)
 
 
-        val query = realm.where<Schedule>()
+        var query = realm.where<Schedule>()
         query.equalTo("completeFlag", 0.toInt())
-        val schedules = query.findAll()
+        var schedules = query.findAll()
 
-        val adapter = ScheduleAdapter(schedules)
+        var adapter = ScheduleAdapter(schedules)
         recycleView.adapter = adapter
         fab.setOnClickListener {
             val intent = Intent(this, ScheduleEditActivity::class.java)

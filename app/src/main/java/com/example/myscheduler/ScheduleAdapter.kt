@@ -32,7 +32,6 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
         var title: TextView = itemView.findViewById(R.id.tvTaskName)
         var time: TextView = itemView.findViewById(R.id.tvTime)
         var progress: TextView = itemView.findViewById(R.id.tvTaskProgress)
-        var complete: CheckBox = itemView.findViewById(R.id.cbTaskComplete)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val infrater = LayoutInflater.from(parent.context)
@@ -45,9 +44,7 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
         holder.time.text = DateFormat.format("HH:mm ", schedule?.time)
         holder.title.text = schedule?.title
         holder.progress.text = schedule?.progressDate.toString()
-        if (schedule != null) {
-            holder.complete.isChecked = schedule.completeFlag != 0
-        }
+
         holder.itemView.setOnClickListener {
             listener1?.invoke(schedule?.id)
         }
