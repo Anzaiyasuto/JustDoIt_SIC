@@ -104,11 +104,21 @@ class ScheduleEditActivity : AppCompatActivity(),
             val dialog = DatePickerFragment()
             dialog.show(supportFragmentManager, "date_dialog")
         }
+        dateEdit.setOnLongClickListener {
+            val dialog = DatePickerFragment()
+            dialog.show(supportFragmentManager, "date_dialog")
+            true
+        }
 
         //時間選択
         dateEdit2.setOnClickListener {
             val dialog = TimePickerFragment()
             dialog.show(supportFragmentManager, "time_dialog")
+        }
+        dateEdit2.setOnLongClickListener {
+            val dialog = TimePickerFragment()
+            dialog.show(supportFragmentManager, "time_dialog")
+            true
         }
 
         //保存ボタンクリック
