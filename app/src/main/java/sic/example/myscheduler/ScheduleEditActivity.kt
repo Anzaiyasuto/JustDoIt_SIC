@@ -113,107 +113,48 @@ class ScheduleEditActivity : AppCompatActivity(),
 
         //保存ボタンクリック
         save.setOnClickListener {
-            when (scheduleId) {
-                -1L -> {
-                    //データをデータベースに格納
-                    realm.executeTransaction { db: Realm ->
-                        val maxId = db.where<Schedule>().max("id")
-                        val nextId = (maxId?.toLong() ?: 0L) + 1
+            if(titleEdit.text.toString() != "") {
+                when (scheduleId) {
+                    -1L -> {
+                        //データをデータベースに格納
+                        realm.executeTransaction { db: Realm ->
+                            val maxId = db.where<Schedule>().max("id")
+                            val nextId = (maxId?.toLong() ?: 0L) + 1
 
-                        val newSchedule = db.createObject<Schedule>(nextId)
-                        val dateDayNew = dateEdit.text.toString().toDate("yyyy/MM/dd")
-                        val dateTimeNew = dateEdit2.text.toString().toDate("HH:mm")
-                        if (dateDayNew != null) newSchedule.day = dateDayNew
-                        if (dateTimeNew != null) newSchedule.time = dateTimeNew
+                            val newSchedule = db.createObject<Schedule>(nextId)
+                            val dateDayNew = dateEdit.text.toString().toDate("yyyy/MM/dd")
+                            val dateTimeNew = dateEdit2.text.toString().toDate("HH:mm")
+                            if (dateDayNew != null) newSchedule.day = dateDayNew
+                            if (dateTimeNew != null) newSchedule.time = dateTimeNew
 
-                        newSchedule.title = titleEdit.text.toString()
-                        newSchedule.progressDate = progress_seekbar.progress
-                        if (newSchedule.progressDate == 100) {
-                            newSchedule.completeFlag = 1
-                            Toast.makeText(this, "COMPLETE", Toast.LENGTH_LONG).show()
-                        } else {
-                            newSchedule.completeFlag = 0
-                        }
-                        requestCode = newSchedule.id.toInt()
-
-                        //通知処理
-                        val date = "${dateEdit.text} ${dateEdit2.text}".toDate()
-                        System.currentTimeMillis()
-
-                        val calendar = Calendar.getInstance()
-                        calendar.time = date
-                        val intent = Intent(applicationContext, AlarmNotification::class.java)
-                        intent.putExtra("RequestCode", requestCode)
-                        pending = PendingIntent.getBroadcast(applicationContext, requestCode, intent, 0)
-                        // アラームをセットする
-                        am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                        if (am != null) {
-                            am!!.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pending)
-                            // トーストで設定されたことをを表示
-                            Toast.makeText(applicationContext, "アラームをセットしました。", Toast.LENGTH_SHORT).show()
-                            //Log.d("debug", "start")
-                        }
-
-                        //Toast.makeText(this, "アラームがセットできませんでした。", Toast.LENGTH_LONG).show()
-                        finish()
-                    }
-                    //初回の保存に関してはダイアログ表示を行わないー＞というよりも行えない（技術力不足）
-                    /*
-                    Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
-                        .setActionTextColor(Color.YELLOW)
-                        .show()
-                    */
-
-                }
-                else -> {
-                    realm.executeTransaction { db: Realm ->
-
-                        val reNewSchedule = db.where<Schedule>()
-                            .equalTo("id", scheduleId).findFirst()
-                        reNewSchedule?.title = titleEdit.text.toString()
-
-                        val dateDayRenew = dateEdit.text.toString().toDate("yyyy/MM/dd")
-                        val dateTimeRenew = dateEdit2.text.toString().toDate("HH:mm")
-                        if (dateDayRenew != null) reNewSchedule?.day = dateDayRenew
-                        if (dateTimeRenew != null) reNewSchedule?.time = dateTimeRenew
-
-                        if (reNewSchedule != null) reNewSchedule.progressDate = progress_seekbar.progress
-                        if (reNewSchedule != null) {
-                            if (reNewSchedule.progressDate == 100) {
-                                reNewSchedule.completeFlag = 1
+                            newSchedule.title = titleEdit.text.toString()
+                            newSchedule.progressDate = progress_seekbar.progress
+                            if (newSchedule.progressDate == 100) {
+                                newSchedule.completeFlag = 1
                                 Toast.makeText(this, "COMPLETE", Toast.LENGTH_LONG).show()
-                                finish()
-                                realm.close()
+                            } else {
+                                newSchedule.completeFlag = 0
                             }
-                        }
+                            requestCode = newSchedule.id.toInt()
 
-                        if (reNewSchedule != null) requestCode = reNewSchedule.id.toInt()
+                            //通知処理
+                            val date = "${dateEdit.text} ${dateEdit2.text}".toDate()
+                            System.currentTimeMillis()
 
-                        //通知処理
-                        //val date = "${da}"
-
-                        if (reNewSchedule != null) {
-                            requestCode = reNewSchedule.id.toInt()
-                        }
-
-                        val indent = Intent(applicationContext, AlarmNotification::class.java)
-                        val pending = PendingIntent.getBroadcast(
-                            applicationContext, requestCode, indent, 0)
-
-                        // アラームを解除する
-                        val am = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                        am.cancel(pending)
-
-                        val date = "${dateEdit.text} ${dateEdit2.text}".toDate()
-                        when {
-                            date != null -> {
-                                val calendar = Calendar.getInstance()
-                                calendar.time = date
-                                val intent =
-                                    Intent(applicationContext, AlarmNotification::class.java)
-                                intent.putExtra("RequestCode", requestCode)
-                                // アラームをセットする
-                                am.setExact(
+                            val calendar = Calendar.getInstance()
+                            calendar.time = date
+                            val intent = Intent(applicationContext, AlarmNotification::class.java)
+                            intent.putExtra("RequestCode", requestCode)
+                            pending = PendingIntent.getBroadcast(
+                                applicationContext,
+                                requestCode,
+                                intent,
+                                0
+                            )
+                            // アラームをセットする
+                            am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                            if (am != null) {
+                                am!!.setExact(
                                     AlarmManager.RTC_WAKEUP,
                                     calendar.timeInMillis,
                                     pending
@@ -221,24 +162,104 @@ class ScheduleEditActivity : AppCompatActivity(),
                                 // トーストで設定されたことをを表示
                                 Toast.makeText(
                                     applicationContext,
-                                    "alarm restart",
+                                    "アラームをセットしました。",
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 //Log.d("debug", "start")
                             }
-                            else -> Toast.makeText(this, "404 Not Found", Toast.LENGTH_LONG).show()
+
+                            //Toast.makeText(this, "アラームがセットできませんでした。", Toast.LENGTH_LONG).show()
+                            finish()
                         }
-                        //alpha
+                        //初回の保存に関してはダイアログ表示を行わないー＞というよりも行えない（技術力不足）
                         /*
+                    Snackbar.make(view, "追加しました", Snackbar.LENGTH_SHORT)
+                        .setActionTextColor(Color.YELLOW)
+                        .show()
+                    */
+
+                    }
+                    else -> {
+                        realm.executeTransaction { db: Realm ->
+
+                            val reNewSchedule = db.where<Schedule>()
+                                .equalTo("id", scheduleId).findFirst()
+                            reNewSchedule?.title = titleEdit.text.toString()
+
+                            val dateDayRenew = dateEdit.text.toString().toDate("yyyy/MM/dd")
+                            val dateTimeRenew = dateEdit2.text.toString().toDate("HH:mm")
+                            if (dateDayRenew != null) reNewSchedule?.day = dateDayRenew
+                            if (dateTimeRenew != null) reNewSchedule?.time = dateTimeRenew
+
+                            if (reNewSchedule != null) reNewSchedule.progressDate =
+                                progress_seekbar.progress
+                            if (reNewSchedule != null) {
+                                if (reNewSchedule.progressDate == 100) {
+                                    reNewSchedule.completeFlag = 1
+                                    Toast.makeText(this, "COMPLETE", Toast.LENGTH_LONG).show()
+                                    finish()
+                                    realm.close()
+                                }
+                            }
+
+                            if (reNewSchedule != null) requestCode = reNewSchedule.id.toInt()
+
+                            //通知処理
+                            //val date = "${da}"
+
+                            if (reNewSchedule != null) {
+                                requestCode = reNewSchedule.id.toInt()
+                            }
+
+                            val indent = Intent(applicationContext, AlarmNotification::class.java)
+                            val pending = PendingIntent.getBroadcast(
+                                applicationContext, requestCode, indent, 0
+                            )
+
+                            // アラームを解除する
+                            val am = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                            am.cancel(pending)
+
+                            val date = "${dateEdit.text} ${dateEdit2.text}".toDate()
+                            when {
+                                date != null -> {
+                                    val calendar = Calendar.getInstance()
+                                    calendar.time = date
+                                    val intent =
+                                        Intent(applicationContext, AlarmNotification::class.java)
+                                    intent.putExtra("RequestCode", requestCode)
+                                    // アラームをセットする
+                                    am.setExact(
+                                        AlarmManager.RTC_WAKEUP,
+                                        calendar.timeInMillis,
+                                        pending
+                                    )
+                                    // トーストで設定されたことをを表示
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "alarm restart",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    //Log.d("debug", "start")
+                                }
+                                else -> Toast.makeText(this, "404 Not Found", Toast.LENGTH_LONG)
+                                    .show()
+                            }
+                            //alpha
+                            /*
                         Snackbar.make(view, "修正しました", Snackbar.LENGTH_SHORT)
                             .setAction("戻る") { finish() }
                             .setActionTextColor(Color.YELLOW)
                             .show()
                     */
-                        finish()
-                    }
+                            finish()
+                        }
 
+                    }
                 }
+            } else {
+                Toast.makeText(applicationContext,
+                    "title null", Toast.LENGTH_SHORT).show()
             }
         }
 
