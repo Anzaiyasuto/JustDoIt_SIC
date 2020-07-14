@@ -24,7 +24,7 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
         this.listener1 = listener
     }
     fun setOnItemLongClickListener(listener: (Long?) -> Unit){
-//        this.listener2 = listener
+        this.listener2 = listener
     }
 
     init {
