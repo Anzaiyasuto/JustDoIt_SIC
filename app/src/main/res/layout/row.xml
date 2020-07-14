@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -17,17 +18,26 @@
                 android:id="@+id/tvDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="2020/3/21"
-                android:textSize="18sp" />
+                android:layout_marginStart="15dp"
+                android:textSize="18sp"
+                tools:text="2020/4/30" />
 
             <TextView
                 android:id="@+id/tvTime"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="07:51"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:text="10:00" />
+
+            <TextView
+                android:id="@+id/tvLimitDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:gravity="right"
+                android:textSize="18sp"
+                tools:text="残り1日" />
         </LinearLayout>
 
         <LinearLayout
@@ -39,13 +49,17 @@
                 android:id="@+id/tvTaskName"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvTaskProgress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp" />
+                android:layout_marginEnd="15dp"
+                android:gravity="right"
+                android:textSize="18sp"
+                tools:text="1000%" />
         </LinearLayout>
     </LinearLayout>
 
