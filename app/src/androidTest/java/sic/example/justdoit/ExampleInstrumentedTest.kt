@@ -1,4 +1,4 @@
-package sic.example.myscheduler
+package sic.example.justdoit
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

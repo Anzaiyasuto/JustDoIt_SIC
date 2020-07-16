@@ -1,18 +1,15 @@
-package sic.example.myscheduler
+package sic.example.justdoit
 
 import android.graphics.Color
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testnotificationmanagerrepeat.R
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
-import kotlinx.android.synthetic.main.activity_schedule_edit.*
 import java.util.*
 
 class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
@@ -44,14 +41,14 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val schedule: Schedule? = getItem(position)
-        holder.day.text = DateFormat.format("yyyy/MM/dd ", schedule?.day)
+        holder.day.text = DateFormat.format("yyyy/MM/dd ", schedule?.time)
         holder.time.text = DateFormat.format("HH:mm ", schedule?.time)
         holder.title.text = schedule?.title
         val str = String.format(Locale.US, "%d%%", schedule?.progressDate)
         holder.progress.text = str
         val c = Calendar.getInstance()
         if (schedule != null) {
-            c.time = schedule.day
+            c.time = schedule.time
         }
         val timeMillis1 = c.timeInMillis
         val currentTimeMillis = System.currentTimeMillis()
