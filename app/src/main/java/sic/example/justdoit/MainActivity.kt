@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * MainActivityの初期化等を行うメソッドです.
-     *
-     *
+     *@param realm(Realm)
+     *@return void
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     /**
      *MainActivity開始時に呼ばれるメソッドです.
-     *
+     *@param layout(LinearLayoutManager),
      *
      */
     override fun onStart() {
