@@ -21,6 +21,19 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * タスクの編集を行う処理.
+ *
+ * @author
+ * @version 0721
+ */
+
+
+/**
+ *
+ * @author
+ * @version 0721
+ */
 
 //TimerAlertDialog.Listenerを継承する（可能ならば）
 class ScheduleEditActivity : AppCompatActivity(),
@@ -32,15 +45,30 @@ class ScheduleEditActivity : AppCompatActivity(),
     private var pending: PendingIntent? = null
     private var requestCode = 1
 
+    /**
+     *アプリ内の期日設定部分を選択したときのメソッドです.
+     *
+     */
     override fun onSelected(year: Int, month: Int, date: Int) {
         val c = Calendar.getInstance()
         c.set(year, month, date)
         dateEdit.text = DateFormat.format("yyyy/MM/dd", c)
     }
+
+    /**
+     *アプリ内の期限時間設定部分を選択したときのメソッドです．
+     *
+     */
     override fun onSelected(hourOfDay: Int, minute: Int) {
         dateEdit2.text = "%1$02d:%2$02d".format(hourOfDay, minute)
     }
 
+
+    /**
+     * 画面起動時に行われる処理を行うメソッドです.
+     * @
+     * @
+     */
     //画面起動時に行われる処理
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -335,6 +363,10 @@ class ScheduleEditActivity : AppCompatActivity(),
         //シークバー操作
         progress_seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 //ツマミがドラッグされると呼ばれる
+            /**
+             * シークバーのツマミがドラッグされた時のメソッドです.
+             *
+             */
                 override fun onProgressChanged(
                     seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                     // 68 % のようにフォーマト、
@@ -342,9 +374,19 @@ class ScheduleEditActivity : AppCompatActivity(),
                     val str = String.format(Locale.US, "%d %%", progress)
                     progress_text.text = str
                 }
+
+            /**
+             * シークバーのツマミがタッチされた時のメソッドです.
+             *
+             */
                 override fun onStartTrackingTouch(seekBar: SeekBar) {
                     // ツマミがタッチされた時に呼ばれる
                 }
+
+            /**
+             * シークバーのツマミがリリースされた時のメソッドです.
+             *
+             */
                 override fun onStopTrackingTouch(seekBar: SeekBar) {
                     // ツマミがリリースされた時に呼ばれる
                 }
@@ -352,12 +394,20 @@ class ScheduleEditActivity : AppCompatActivity(),
     }
 
     //中断処理
+    /**
+     * タスク編集の中断をするメソッドです.
+     *
+     */
     override fun onDestroy() {
         super.onDestroy()
         realm.close()
     }
 
     //データフォーマット
+    /**
+     * タスクデータのフォーマットを行うメソッドです.
+     *
+     */
     private fun String.toDate(pattern: String = "yyyy/MM/dd HH:mm"): Date? {
         return try {
             SimpleDateFormat(pattern).parse(this)

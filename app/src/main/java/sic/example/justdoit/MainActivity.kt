@@ -11,9 +11,27 @@ import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
+/**
+ * アプリのメイン画面の処理.
+ *
+ * @author 安斎康人
+ * @version 0721
+ *
+ */
+
+/**
+ * アプリのメイン画面のクラスです.
+ * @author 安斎康人
+ * @version 0721
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var realm: Realm
 
+    /**
+     * MainActivityの初期化等を行うメソッドです.
+     *
+     *
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,6 +39,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     *MainActivity開始時に呼ばれるメソッドです.
+     *
+     *
+     */
     override fun onStart() {
         super.onStart()
         realm = Realm.getDefaultInstance()
@@ -54,6 +77,11 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    /**
+     *MainActivityの終了をするメソッドです.
+     *
+     */
     override fun onDestroy() {
         super.onDestroy()
         realm.close()

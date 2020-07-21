@@ -18,11 +18,27 @@ import com.example.testnotificationmanagerrepeat.R
 import io.realm.Realm
 import io.realm.kotlin.where
 
+/**
+ * アプリの通知に関しての処理.
+ *
+ * @author 安斎康人
+ * @version 0721
+ */
+
+/**
+ * @author 安斎康人
+ * @version 0721
+ */
+
 class AlarmNotification : BroadcastReceiver() {
     private lateinit var realm: Realm
 
     // データを受信した
     @RequiresApi(Build.VERSION_CODES.O)
+    /**
+     * 通知データを受信したときのメソッドです.
+     *
+     */
     override fun onReceive(context: Context, intent: Intent) {
 
         Log.d("AlarmBroadcastReceiver", "onReceive() pid=" + Process.myPid())

@@ -12,14 +12,36 @@ import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
 import java.util.*
 
+/**
+ *ホーム画面のリストの更新についての処理.
+ *
+ * @author 安斎康人
+ * @version 0721
+ */
+
+/**
+ *
+ * @author 安斎康人
+ * @version 0721
+ */
+
 class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
     RealmRecyclerViewAdapter<Schedule, ScheduleAdapter.ViewHolder>(data, true) {
     private var listener1: ((Long?) -> Unit)? = null
     private var listener2: ((Long?) -> Unit)? = null
 
+    /**
+     *
+     *
+     */
     fun setOnItemClickListener(listener: (Long?) -> Unit) {
         this.listener1 = listener
     }
+
+    /**
+     *
+     *
+     */
     fun setOnItemLongClickListener(listener: (Long?) -> Unit){
         this.listener2 = listener
     }
@@ -34,11 +56,21 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
         var progress: TextView = itemView.findViewById(R.id.tvTaskProgress)
         var limit: TextView = itemView.findViewById(R.id.tvLimitDay)
     }
+
+    /**
+     *
+     *
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val infrater = LayoutInflater.from(parent.context)
         val view = infrater.inflate(R.layout.row, parent, false)
         return ViewHolder(view)
     }
+
+    /**
+     *
+     *
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val schedule: Schedule? = getItem(position)
         holder.day.text = DateFormat.format("yyyy/MM/dd ", schedule?.time)
@@ -74,6 +106,11 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
         }
 
     }
+
+    /**
+     *
+     *
+     */
     override fun getItemId(position: Int): Long {
         return getItem(position)?.id ?: 0
     }

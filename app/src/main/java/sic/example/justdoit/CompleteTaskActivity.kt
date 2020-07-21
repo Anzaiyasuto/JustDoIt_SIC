@@ -7,8 +7,26 @@ import io.realm.Realm
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_complete_task.*
 
+/**
+ *タスクの完了動作についての処理.
+ *
+ * @author 原田
+ * @version 0721
+ */
+
+/**
+ *
+ * @author 原田
+ * @version 0721
+ */
 class CompleteTaskActivity : AppCompatActivity() {
     private lateinit var realm:Realm
+
+    /**
+     * CompleteTaskActivityの初期化等を行うメソッドです.
+     * @
+     * @
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complete_task)
