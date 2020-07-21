@@ -10,13 +10,13 @@ import kotlinx.android.synthetic.main.activity_complete_task.*
 /**
  *タスクの完了動作についての処理.
  *
- * @author 原田
+ * @author 原田佳英,安斎康人
  * @version 0721
  */
 
 /**
  *完了画面のクラス
- * @author 原田
+ * @author 原田佳英,安斎康人
  * @version 0721
  */
 class CompleteTaskActivity : AppCompatActivity() {

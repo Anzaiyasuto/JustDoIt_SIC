@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * MainActivityの初期化等を行うメソッドです.
-     *@param realm(Realm)
-     *@return void
+     * @param realm(Realm)
+     * @return void
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +40,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     *MainActivity開始時に呼ばれるメソッドです.
-     *@param layout(LinearLayoutManager),
-     *
+     * MainActivity開始時に呼ばれるメソッドです.
+     * @param layout(LinearLayoutManager),query(realm)
+     * @return void
      */
     override fun onStart() {
         super.onStart()
@@ -79,8 +79,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     *MainActivityの終了をするメソッドです.
-     *
+     * MainActivityの終了をするメソッドです.
+     * @return void
      */
     override fun onDestroy() {
         super.onDestroy()

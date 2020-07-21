@@ -37,7 +37,8 @@ class AlarmNotification : BroadcastReceiver() {
     @RequiresApi(Build.VERSION_CODES.O)
     /**
      * 通知データを受信したときのメソッドです.
-     *
+     * @param context(Context),intent(Intent)
+     * @return void
      */
     override fun onReceive(context: Context, intent: Intent) {
 

@@ -13,13 +13,14 @@ import io.realm.RealmRecyclerViewAdapter
 import java.util.*
 
 /**
- *ホーム画面のリストの更新についての処理.
+ * ホーム画面のリストの更新についての処理.
  *
  * @author 安斎康人
  * @version 0721
  */
 
 /**
+ * ホーム画面のリサイクルビューに対するアダプタ.
  *
  * @author 安斎康人
  * @version 0721
@@ -32,7 +33,8 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
 
     /**
      *
-     *
+     * @param 
+     * @return
      */
     fun setOnItemClickListener(listener: (Long?) -> Unit) {
         this.listener1 = listener
@@ -40,7 +42,8 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
 
     /**
      *
-     *
+     * @param
+     * @return
      */
     fun setOnItemLongClickListener(listener: (Long?) -> Unit){
         this.listener2 = listener
@@ -59,7 +62,8 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
 
     /**
      *
-     *
+     * @param
+     * @return
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val infrater = LayoutInflater.from(parent.context)
@@ -69,7 +73,8 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
 
     /**
      *
-     *
+     * @param
+     * @return
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val schedule: Schedule? = getItem(position)
@@ -109,7 +114,8 @@ class ScheduleAdapter(data: OrderedRealmCollection<Schedule>) :
 
     /**
      *
-     *
+     * @param
+     * @return
      */
     override fun getItemId(position: Int): Long {
         return getItem(position)?.id ?: 0

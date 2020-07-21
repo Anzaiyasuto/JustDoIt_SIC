@@ -24,14 +24,14 @@ import java.util.*
 /**
  * タスクの編集を行う処理.
  *
- * @author
+ * @author 安斎康人
  * @version 0721
  */
 
 
 /**
  *
- * @author
+ * @author 安斎康人
  * @version 0721
  */
 
@@ -46,8 +46,9 @@ class ScheduleEditActivity : AppCompatActivity(),
     private var requestCode = 1
 
     /**
-     *アプリ内の期日設定部分を選択したときのメソッドです.
-     *
+     * アプリ内の期日設定部分を選択したときのメソッドです.
+     * @param int(year),int(month),int(date)
+     * @return void
      */
     override fun onSelected(year: Int, month: Int, date: Int) {
         val c = Calendar.getInstance()
@@ -56,8 +57,9 @@ class ScheduleEditActivity : AppCompatActivity(),
     }
 
     /**
-     *アプリ内の期限時間設定部分を選択したときのメソッドです．
-     *
+     * アプリ内の期限時間設定部分を選択したときのメソッドです．
+     * @param int(hourOfDay),int(minute)
+     * @return void
      */
     override fun onSelected(hourOfDay: Int, minute: Int) {
         dateEdit2.text = "%1$02d:%2$02d".format(hourOfDay, minute)
@@ -66,8 +68,8 @@ class ScheduleEditActivity : AppCompatActivity(),
 
     /**
      * 画面起動時に行われる処理を行うメソッドです.
-     * @
-     * @
+     * @param scheduleId(intent),
+     * @return void
      */
     //画面起動時に行われる処理
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -365,7 +367,7 @@ class ScheduleEditActivity : AppCompatActivity(),
                 //ツマミがドラッグされると呼ばれる
             /**
              * シークバーのツマミがドラッグされた時のメソッドです.
-             *
+             * @return void
              */
                 override fun onProgressChanged(
                     seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -377,7 +379,7 @@ class ScheduleEditActivity : AppCompatActivity(),
 
             /**
              * シークバーのツマミがタッチされた時のメソッドです.
-             *
+             * @return void
              */
                 override fun onStartTrackingTouch(seekBar: SeekBar) {
                     // ツマミがタッチされた時に呼ばれる
@@ -385,7 +387,7 @@ class ScheduleEditActivity : AppCompatActivity(),
 
             /**
              * シークバーのツマミがリリースされた時のメソッドです.
-             *
+             * @return void
              */
                 override fun onStopTrackingTouch(seekBar: SeekBar) {
                     // ツマミがリリースされた時に呼ばれる
@@ -396,7 +398,7 @@ class ScheduleEditActivity : AppCompatActivity(),
     //中断処理
     /**
      * タスク編集の中断をするメソッドです.
-     *
+     * @return void
      */
     override fun onDestroy() {
         super.onDestroy()
@@ -406,7 +408,8 @@ class ScheduleEditActivity : AppCompatActivity(),
     //データフォーマット
     /**
      * タスクデータのフォーマットを行うメソッドです.
-     *
+     * @param pattern(String)
+     * @return void
      */
     private fun String.toDate(pattern: String = "yyyy/MM/dd HH:mm"): Date? {
         return try {
