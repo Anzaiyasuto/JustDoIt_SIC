@@ -129,6 +129,7 @@ class ScheduleEditActivity : AppCompatActivity(),
         //保存ボタンクリック
         save.setOnClickListener {
             if(titleEdit.text.toString() != "") {
+                save.visibility = View.INVISIBLE
                 when (scheduleId) {
                     -1L -> {
                         //データをデータベースに格納
@@ -179,6 +180,7 @@ class ScheduleEditActivity : AppCompatActivity(),
                                         pending
                                     )
                                     // トーストで設定されたことをを表示
+
                                     Toast.makeText(
                                         applicationContext,
                                         "alarm start",
@@ -258,6 +260,7 @@ class ScheduleEditActivity : AppCompatActivity(),
                                                 pending
                                             )
                                             // トーストで設定されたことをを表示
+
                                             Toast.makeText(
                                                 applicationContext,
                                                 "alarm restart",
