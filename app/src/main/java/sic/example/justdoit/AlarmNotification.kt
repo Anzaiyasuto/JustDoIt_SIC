@@ -1,4 +1,4 @@
-package sic.example.myscheduler
+package sic.example.justdoit
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -37,7 +37,7 @@ class AlarmNotification : BroadcastReceiver() {
         realm = Realm.getDefaultInstance()
 
         val schedule = realm.where<Schedule>().equalTo("id", requestCode).findFirst()
-        val showDay = DateFormat.format("MM/dd", schedule?.day)
+        val showDay = DateFormat.format("MM/dd", schedule?.time)
         val showTime = DateFormat.format("HH:mm", schedule?.time)
 
         val message = "Just Do It! : ${schedule?.title}  limit => $showDay $showTime"

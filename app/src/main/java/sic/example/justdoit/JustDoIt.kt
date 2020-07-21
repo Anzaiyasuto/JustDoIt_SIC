@@ -1,9 +1,9 @@
-package sic.example.myscheduler
+package sic.example.justdoit
 
 import android.app.Application
 import io.realm.Realm
 
-class MySchedulerApplication : Application() {
+class JustDoIt : Application() {
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)

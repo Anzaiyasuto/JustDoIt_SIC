@@ -1,4 +1,4 @@
-package sic.example.myscheduler
+package sic.example.justdoit
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,15 +19,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+    }
+
+    override fun onStart() {
+        super.onStart()
         realm = Realm.getDefaultInstance()
         recycleView.layoutManager = LinearLayoutManager(this)
         val layout = LinearLayoutManager(this@MainActivity)
 
         val query = realm.where<Schedule>()
         query.equalTo("completeFlag", 0.toInt())
-        var schedules = query.findAll()
+        val schedules = query.findAll()
 
-        var adapter = ScheduleAdapter(schedules)
+        val adapter = ScheduleAdapter(schedules)
         recycleView.adapter = adapter
 
         //区切り専用のオブジェクトを生成。
@@ -45,11 +49,11 @@ class MainActivity : AppCompatActivity() {
         }
         adapter.setOnItemLongClickListener{ id ->
             val intent2 = Intent(this, CompleteTaskActivity::class.java)
-            .putExtra("schedule_id", id)
+                .putExtra("schedule_id", id)
             startActivity(intent2)
         }
-    }
 
+    }
     override fun onDestroy() {
         super.onDestroy()
         realm.close()

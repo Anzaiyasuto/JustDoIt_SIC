@@ -1,11 +1,10 @@
-package sic.example.myscheduler
+package sic.example.justdoit
 
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
-import android.widget.CalendarView
 import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment

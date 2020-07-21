@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:outlineSpotShadowColor="#00FFFFFF"
-    tools:context="sic.example.myscheduler.ScheduleEditActivity">
+    tools:context="sic.example.justdoit.ScheduleEditActivity">
 
     <TextView
         android:id="@+id/dateEdit2"

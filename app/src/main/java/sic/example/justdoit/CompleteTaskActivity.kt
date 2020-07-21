@@ -1,4 +1,4 @@
-package sic.example.myscheduler
+package sic.example.justdoit
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
