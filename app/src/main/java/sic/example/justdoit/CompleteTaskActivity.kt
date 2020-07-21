@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_complete_task.*
  */
 
 /**
- *
+ *完了画面のクラス
  * @author 原田
  * @version 0721
  */
@@ -24,8 +24,8 @@ class CompleteTaskActivity : AppCompatActivity() {
 
     /**
      * CompleteTaskActivityの初期化等を行うメソッドです.
-     * @
-     * @
+     * @param realm(Realm), scheduleId(Long)
+     * @return　void
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
